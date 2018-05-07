@@ -35,6 +35,9 @@ var detectNetwork = function(cardNumber) {
 	networkName = "Diner's Club";  
   } else if( (prefix2===34 || prefix2===37) && len===15 ) {
 	networkName = "American Express";  
+  } else if( (prefix4===4903 || prefix4===4905 || prefix4===4911 || prefix4===4936 || prefix4===6333 || prefix4===6759 || 
+    prefix6===564182 || prefix6===633110) && (len===16 || len===18 || len===19) ) {
+	networkName = "Switch";
   } else if( prefix1===4 && (len===13 || len===16 || len===19) ) {
 	networkName = "Visa";  
   } else if( (prefix2===51 || prefix2===52 || prefix2===53 || prefix2===54 || prefix2===55) && len===16 ) {
@@ -44,6 +47,9 @@ var detectNetwork = function(cardNumber) {
   } else if( (prefix4===5018 || prefix4===5020 || prefix4===5038 || prefix4===6304) && (len===12 || len===13 || len===14 || 
   len===15 || len===16 || len===17 || len===18 || len===19) ) {
 	networkName = "Maestro";  
+  } else if( ((prefix6>=622126 && prefix6<=622925) || (prefix3>=624 && prefix3<=626) || (prefix4>=6282 && prefix4<=6288)) 
+	  && (len>=16 && len<=19) ) {
+	networkName = "China UnionPay";
   } else {
 	networkName = 'not a valid name';
   }
