@@ -11,8 +11,43 @@ var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
   // The American Express network always starts with a 34 or 37 and is 15 digits long
-
+  // Visa always has a prefix of 4 and a length of 13, 16, or 19.
+  // MasterCard always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
+  // Discover has a prefix of 6011 and a length of 16 or 19.
+  // Maestro has a prefix of 5018, 5020, 5038, 6304 and a length of 12, 13, 14, 15, 16, 17, 18 and 19.
+  // China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
+  // Switch has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
+  
   // Once you've read this, go ahead and try to implement this function, then return to the console.
+  
+  var networkName;
+  var len = cardNumber.length;
+  var prefix1 = parseInt(cardNumber.slice(0,1));
+  var prefix2 = parseInt(cardNumber.slice(0,2));
+  var prefix3 = parseInt(cardNumber.slice(0,3));
+  var prefix4 = parseInt(cardNumber.slice(0,4));
+  var prefix6 = parseInt(cardNumber.slice(0,6));
+  
+  if(cardNumber.length<12) {
+	return 'Enter a valid card number';
+  }
+  if( (prefix2===38 || prefix2===39) && len===14 ) {
+	networkName = "Diner's Club";  
+  } else if( (prefix2===34 || prefix2===37) && len===15 ) {
+	networkName = "American Express";  
+  } else if( prefix1===4 && (len===13 || len===16 || len===19) ) {
+	networkName = "Visa";  
+  } else if( (prefix2===51 || prefix2===52 || prefix2===53 || prefix2===54 || prefix2===55) && len===16 ) {
+	networkName = "MasterCard";  
+  } else if( (prefix4===6011 || prefix2===65 || (prefix3>=644 && prefix3<=649) ) && (len===16 || len===19) ) {
+	networkName = "Discover";  
+  } else if( (prefix4===5018 || prefix4===5020 || prefix4===5038 || prefix4===6304) && (len===12 || len===13 || len===14 || 
+  len===15 || len===16 || len===17 || len===18 || len===19) ) {
+	networkName = "Maestro";  
+  } else {
+	networkName = 'not a valid name';
+  }
+  return networkName;
 };
 
 
